@@ -418,7 +418,7 @@ class QuantileLossFunction(RegressionLossFunction):
         mask = y > pred
         if sample_weight is None:
             loss = (alpha * diff[mask].sum() -
-                    (1.0 - alpha) * diff[~mask].sum()) / y.shape[0]
+                    (1.0 - alpha) * diff[~mask].sum()) / (y.sum() * y.shape[0])      ########
         else:
             loss = ((alpha * np.sum(sample_weight[mask] * diff[mask]) -
                     (1.0 - alpha) * np.sum(sample_weight[~mask] * diff[~mask])) /
